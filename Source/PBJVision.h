@@ -73,9 +73,9 @@ typedef NS_ENUM(NSInteger, PBJFlashMode) {
 };
 
 typedef NS_ENUM(NSInteger, PBJMirroringMode) {
-	PBJMirroringAuto = 0,
-	PBJMirroringOn,
-	PBJMirroringOff
+    PBJMirroringAuto = 0,
+    PBJMirroringOn,
+    PBJMirroringOff
 };
 
 typedef NS_ENUM(NSInteger, PBJAuthorizationStatus) {
@@ -104,10 +104,6 @@ typedef NS_ENUM(NSInteger, PBJVisionErrorType)
     PBJVisionErrorOutputFileExists = 103,
     PBJVisionErrorCaptureFailed = 104,
 };
-
-// additional video capture keys
-
-extern NSString * const PBJVisionVideoRotation;
 
 // photo dictionary keys
 
@@ -152,7 +148,6 @@ static CGFloat const PBJVideoBitRate1280x750 = 5000000 * 8;
 // Indicates whether the capture session will make use of the app’s shared audio session. Allows you to
 // use a previously configured audios session with a category such as AVAudioSessionCategoryAmbient.
 @property (nonatomic) BOOL usesApplicationAudioSession;
-@property (nonatomic) BOOL automaticallyConfiguresApplicationAudioSession;
 - (BOOL)isCameraDeviceAvailable:(PBJCameraDevice)cameraDevice;
 
 @property (nonatomic) PBJFlashMode flashMode; // flash and torch
@@ -162,7 +157,6 @@ static CGFloat const PBJVideoBitRate1280x750 = 5000000 * 8;
 
 // video output settings
 
-@property (nonatomic, copy) NSDictionary *additionalVideoProperties;
 @property (nonatomic, copy) NSString *captureSessionPreset;
 @property (nonatomic, copy) NSString *captureDirectory;
 @property (nonatomic) PBJOutputFormat outputFormat;
@@ -213,6 +207,8 @@ static CGFloat const PBJVideoBitRate1280x750 = 5000000 * 8;
 
 @property (nonatomic, readonly) BOOL canCapturePhoto;
 - (void)capturePhoto;
+- (void)capturePreviewPhoto;
+- (void)setupOutputForPhoto;
 
 // video
 // use pause/resume if a session is in progress, end finalizes that recording session
@@ -301,6 +297,7 @@ static CGFloat const PBJVideoBitRate1280x750 = 5000000 * 8;
 - (void)visionWillCapturePhoto:(PBJVision *)vision;
 - (void)visionDidCapturePhoto:(PBJVision *)vision;
 - (void)vision:(PBJVision *)vision capturedPhoto:(nullable NSDictionary *)photoDict error:(nullable NSError *)error;
+- (void)vision:(PBJVision *)vision capturedLivePhotoFromBuffer:(UIImage *)image;
 
 // video
 
