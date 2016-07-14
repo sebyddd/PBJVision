@@ -43,7 +43,7 @@
 
 - (BOOL)setupAudioWithSettings:(NSDictionary *)audioSettings;
 
-- (BOOL)setupVideoWithSettings:(NSDictionary *)videoSettings withAdditional:(NSDictionary *)additional;
+- (BOOL)setupVideoWithSettings:(NSDictionary *)videoSettings;
 
 // write methods, time durations
 
